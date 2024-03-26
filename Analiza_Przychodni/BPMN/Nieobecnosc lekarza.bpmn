@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0xbfs1m" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_1eggx21" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Lekarz odwołał swoją obecność">
+      <bpmn:outgoing>Flow_10ml2rn</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:dataObjectReference id="DataObjectReference_1vq8i6o" name="Zeszyt z wizytami" dataObjectRef="DataObject_03sbmw3" />
+    <bpmn:dataObject id="DataObject_03sbmw3" />
+    <bpmn:task id="Activity_0c1cjhv" name="Ustalenie pacjentów, których trzeba poinformować">
+      <bpmn:incoming>Flow_10ml2rn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bnokcj</bpmn:outgoing>
+      <bpmn:property id="Property_0i55ux6" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1nichia">
+        <bpmn:sourceRef>DataObjectReference_1vq8i6o</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0i55ux6</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_10ml2rn" sourceRef="StartEvent_1" targetRef="Activity_0c1cjhv" />
+    <bpmn:subProcess id="Activity_0zgdfj1" name="Poinformowanie wybranych pacjentów">
+      <bpmn:incoming>Flow_1bnokcj</bpmn:incoming>
+      <bpmn:outgoing>Flow_07ux0ls</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_1bnokcj" sourceRef="Activity_0c1cjhv" targetRef="Activity_0zgdfj1" />
+    <bpmn:endEvent id="Event_12knnfd" name="Wszystkie wizyty w tym dniu u tego lekarza zostały odwołane">
+      <bpmn:incoming>Flow_07ux0ls</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_07ux0ls" sourceRef="Activity_0zgdfj1" targetRef="Event_12knnfd" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1eggx21">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="157" y="145" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1vq8i6o_di" bpmnElement="DataObjectReference_1vq8i6o">
+        <dc:Bounds x="352" y="255" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="327" y="312" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0c1cjhv_di" bpmnElement="Activity_0c1cjhv">
+        <dc:Bounds x="320" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12knnfd_di" bpmnElement="Event_12knnfd">
+        <dc:Bounds x="722" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="697" y="145" width="86" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zgdfj1_di" bpmnElement="Activity_0zgdfj1">
+        <dc:Bounds x="510" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1nichia_di" bpmnElement="DataInputAssociation_1nichia">
+        <di:waypoint x="370" y="255" />
+        <di:waypoint x="370" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10ml2rn_di" bpmnElement="Flow_10ml2rn">
+        <di:waypoint x="215" y="120" />
+        <di:waypoint x="320" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bnokcj_di" bpmnElement="Flow_1bnokcj">
+        <di:waypoint x="420" y="120" />
+        <di:waypoint x="510" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07ux0ls_di" bpmnElement="Flow_07ux0ls">
+        <di:waypoint x="610" y="120" />
+        <di:waypoint x="722" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1puon5k">
+    <bpmndi:BPMNPlane id="BPMNPlane_0gi9ke2" bpmnElement="Activity_0zgdfj1" />
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

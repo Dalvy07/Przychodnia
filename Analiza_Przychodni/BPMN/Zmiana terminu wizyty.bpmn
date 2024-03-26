@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0zoa0b2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_073bw3j" isExecutable="true">
+    <bpmn:startEvent id="Event_1b37658" name="Pacjent przychodzi po przychodni żeby zmienić termin wizyty">
+      <bpmn:outgoing>Flow_1lmbev6</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="Event_14npjgo" name="Pacjent telefonuje do przychodni żeby zmienić termin wizyty">
+      <bpmn:outgoing>Flow_0qvczb2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_0sz2vgx" name="Edycja rezerwacji terminu">
+      <bpmn:incoming>Flow_1r5dxkl</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qy6ifj</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1bzry4j">
+        <bpmn:targetRef>DataObjectReference_1reg6ur</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:dataObjectReference id="DataObjectReference_0yfedso" name="Grafik lekarzy" dataObjectRef="DataObject_1vvsvpy" />
+    <bpmn:dataObject id="DataObject_1vvsvpy" />
+    <bpmn:task id="Activity_1dg4710" name="Ustalenie wolnego terminu przez recepcjonistkę">
+      <bpmn:incoming>Flow_1lmbev6</bpmn:incoming>
+      <bpmn:incoming>Flow_0qvczb2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1r5dxkl</bpmn:outgoing>
+      <bpmn:property id="Property_1ufzj5z" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_07ugcrq">
+        <bpmn:sourceRef>DataObjectReference_0yfedso</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1ufzj5z</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1lmbev6" sourceRef="Event_1b37658" targetRef="Activity_1dg4710" />
+    <bpmn:sequenceFlow id="Flow_0qvczb2" sourceRef="Event_14npjgo" targetRef="Activity_1dg4710" />
+    <bpmn:sequenceFlow id="Flow_1r5dxkl" sourceRef="Activity_1dg4710" targetRef="Activity_0sz2vgx" />
+    <bpmn:dataObjectReference id="DataObjectReference_1reg6ur" name="Zeszyt z rezerwacjami" dataObjectRef="DataObject_0pruonb" />
+    <bpmn:dataObject id="DataObject_0pruonb" />
+    <bpmn:endEvent id="Event_0syc02t" name="Termin wizyty został zmieniony">
+      <bpmn:incoming>Flow_0qy6ifj</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0qy6ifj" sourceRef="Activity_0sz2vgx" targetRef="Event_0syc02t" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_073bw3j">
+      <bpmndi:BPMNShape id="Event_1b37658_di" bpmnElement="Event_1b37658">
+        <dc:Bounds x="172" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="151" y="235" width="80" height="66" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14npjgo_di" bpmnElement="Event_14npjgo">
+        <dc:Bounds x="172" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="146" y="405" width="88" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1dg4710_di" bpmnElement="Activity_1dg4710">
+        <dc:Bounds x="340" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0sz2vgx_di" bpmnElement="Activity_0sz2vgx">
+        <dc:Bounds x="550" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0syc02t_di" bpmnElement="Event_0syc02t">
+        <dc:Bounds x="742" y="282" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="719" y="325" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1reg6ur_di" bpmnElement="DataObjectReference_1reg6ur">
+        <dc:Bounds x="582" y="115" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="567" y="77.5" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0yfedso_di" bpmnElement="DataObjectReference_0yfedso">
+        <dc:Bounds x="372" y="435" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="356" y="495" width="68" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1lmbev6_di" bpmnElement="Flow_1lmbev6">
+        <di:waypoint x="208" y="210" />
+        <di:waypoint x="274" y="210" />
+        <di:waypoint x="274" y="280" />
+        <di:waypoint x="340" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qvczb2_di" bpmnElement="Flow_0qvczb2">
+        <di:waypoint x="208" y="380" />
+        <di:waypoint x="274" y="380" />
+        <di:waypoint x="274" y="320" />
+        <di:waypoint x="340" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_07ugcrq_di" bpmnElement="DataInputAssociation_07ugcrq">
+        <di:waypoint x="390" y="435" />
+        <di:waypoint x="390" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1r5dxkl_di" bpmnElement="Flow_1r5dxkl">
+        <di:waypoint x="440" y="300" />
+        <di:waypoint x="550" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1bzry4j_di" bpmnElement="DataOutputAssociation_1bzry4j">
+        <di:waypoint x="599" y="260" />
+        <di:waypoint x="598" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qy6ifj_di" bpmnElement="Flow_0qy6ifj">
+        <di:waypoint x="650" y="300" />
+        <di:waypoint x="742" y="300" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
