@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02t2woe" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_1pduvmb" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Pacjent przychodzi do przychodzy żeby odwołać wizytę">
+      <bpmn:outgoing>Flow_01s40q2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="Event_0h6ebr6" name="Pacjent telefonuje do przychodzy żeby odwołać wizytę">
+      <bpmn:outgoing>Flow_1aimfue</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_0mtw2oh" name="Usunięcie rezerwacji umuwionego terminu">
+      <bpmn:incoming>Flow_01s40q2</bpmn:incoming>
+      <bpmn:incoming>Flow_1aimfue</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fstmvu</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_08mbml3">
+        <bpmn:targetRef>DataObjectReference_0pqz7ex</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_01s40q2" sourceRef="StartEvent_1" targetRef="Activity_0mtw2oh" />
+    <bpmn:sequenceFlow id="Flow_1aimfue" sourceRef="Event_0h6ebr6" targetRef="Activity_0mtw2oh" />
+    <bpmn:dataObjectReference id="DataObjectReference_0pqz7ex" name="Zeszyt z rezerwacjami" dataObjectRef="DataObject_0lhnze0" />
+    <bpmn:dataObject id="DataObject_0lhnze0" />
+    <bpmn:endEvent id="Event_14h2jhv" name="Wizyta została odwołana">
+      <bpmn:incoming>Flow_1fstmvu</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1fstmvu" sourceRef="Activity_0mtw2oh" targetRef="Event_14h2jhv" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1pduvmb">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="212" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="189" y="265" width="83" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_17uqtux" bpmnElement="Event_0h6ebr6">
+        <dc:Bounds x="212" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="189" y="425" width="83" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mtw2oh_di" bpmnElement="Activity_0mtw2oh">
+        <dc:Bounds x="370" y="290" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0pqz7ex_di" bpmnElement="DataObjectReference_0pqz7ex">
+        <dc:Bounds x="402" y="115" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="388" y="85" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14h2jhv_di" bpmnElement="Event_14h2jhv">
+        <dc:Bounds x="602" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="585" y="355" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_01s40q2_di" bpmnElement="Flow_01s40q2">
+        <di:waypoint x="248" y="240" />
+        <di:waypoint x="309" y="240" />
+        <di:waypoint x="309" y="310" />
+        <di:waypoint x="370" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1aimfue_di" bpmnElement="Flow_1aimfue">
+        <di:waypoint x="248" y="400" />
+        <di:waypoint x="309" y="400" />
+        <di:waypoint x="309" y="350" />
+        <di:waypoint x="370" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_08mbml3_di" bpmnElement="DataOutputAssociation_08mbml3">
+        <di:waypoint x="420" y="290" />
+        <di:waypoint x="422" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fstmvu_di" bpmnElement="Flow_1fstmvu">
+        <di:waypoint x="470" y="330" />
+        <di:waypoint x="602" y="330" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
